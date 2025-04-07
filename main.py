@@ -2,8 +2,15 @@ from stats import (get_word_count,
                    get_character_count, 
                    sort_characters_by_count)
 
+import sys
+
 def main():
-    text = get_book_text("books/frankenstein.txt")
+    # Check to see if the user has correctly used the CLI to import a book/text file
+    if len(sys.argv) < 2:
+         print("Usage: python3 main.py <path_to_book>")
+         sys.exit(1)
+
+    text = get_book_text(sys.argv[1])
     
     # Get and print how many words are found in the text file
     word_count = get_word_count(text)
@@ -31,7 +38,7 @@ def get_book_text(filepath):
 def print_character_count_report(character_count, word_count):
     # Print the program title and the book it's analysing
     print("============ BOOKBOT ============\n" 
-    "Analyzing book found at books/frankenstein.txt...")
+    f"Analyzing book found at {sys.argv[1]}...")
     
     # Print the word count of the book
     print("----------- Word Count ----------\n" 
